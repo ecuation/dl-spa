@@ -19,6 +19,7 @@
     "core-js": "^3.6.5",
     "quasar": "^1.0.0",
     "storybook": "^6.0.26",
+    "vee-validate": "^3.4.3",
     "vue-i18n": "^8.22.1"
   },
   "devDependencies": {
