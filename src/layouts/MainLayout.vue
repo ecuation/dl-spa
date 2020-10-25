@@ -1,47 +1,33 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <!--<q-header elevated>
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
-        />
-
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
+    <div class="q-pa-md">
+      <q-toolbar class="bg-primary text-white">
+        <q-space />
+        <q-tabs>
+          <q-route-tab
+            class="text-capitalize"
+            :label="$t('Index')"
+            :to="{path: '/'}"
+            v-if="isAuthenticated"
+          />
+          <q-route-tab
+            class="text-capitalize"
+            :label="$t('Login')"
+            :to="{path: 'login'}"
+            v-if="!isAuthenticated"
+          />
+          <q-tab
+            class="text-capitalize"
+            name="logout"
+            :label="$t('logout')"
+            @click="logout"
+            v-if="isAuthenticated"
+          />
+        </q-tabs>
       </q-toolbar>
-    </q-header>-->
-
-    <!--<q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-      content-class="bg-grey-1"
-    >
-      <q-list>
-        <q-item-label
-          header
-          class="text-grey-8"
-        >
-          Essential Links
-        </q-item-label>
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
-    </q-drawer>-->
-
+    </div>
     <q-page-container>
-      <router-view />
+      <router-view></router-view>
     </q-page-container>
   </q-layout>
 </template>
@@ -49,58 +35,29 @@
 <script>
 // import EssentialLink from 'components/EssentialLink.vue'
 
-const linksData = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-]
-
 export default {
   name: 'MainLayout',
   // components: { EssentialLink },
   data () {
     return {
-      leftDrawerOpen: false,
-      essentialLinks: linksData
+      isAuth: localStorage.getItem('bearerToken') !== null
+    }
+  },
+  computed: {
+    isAuthenticated: {
+      get: function () {
+        return this.isAuth
+      },
+      set: function (newValue) {
+        this.isAuth = newValue
+      }
+    }
+  },
+  methods: {
+    logout () {
+      localStorage.removeItem('bearerToken')
+      this.$router.push({ path: '/login' })
+      this.isAuthenticated = false
     }
   }
 }

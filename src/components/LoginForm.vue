@@ -56,25 +56,24 @@ export default {
   },
   data () {
     return {
-      email: 'test@test.dev',
-      password: 'secret'
+      email: null,
+      password: null
     }
   },
   methods: {
     onSubmit () {
-      this.$nextTick(() => {
-        this.$axios({ sendToken: false }).post('oauth/token', {
-          grant_type: 'password',
-          client_id: process.env.API_CLIENT_ID,
-          client_secret: process.env.API_CLIENT_SECRET,
-          username: 'test-user@docline.development',
-          password: 'secret123',
-          scope: ''
-        }).then(res => {
-          localStorage.setItem('bearerToken', res.data.access_token)
-        }).catch(err => {
-          console.log(err)
-        })
+      this.$axios({ sendToken: false }).post('oauth/token', {
+        grant_type: 'password',
+        client_id: process.env.API_CLIENT_ID,
+        client_secret: process.env.API_CLIENT_SECRET,
+        username: this.email,
+        password: this.password,
+        scope: ''
+      }).then(res => {
+        localStorage.setItem('bearerToken', res.data.access_token)
+        this.$router.push({ path: '/' })
+      }).catch(err => {
+        console.log('error: ', err)
       })
     }
   }
