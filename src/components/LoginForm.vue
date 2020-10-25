@@ -63,7 +63,7 @@ export default {
   methods: {
     onSubmit () {
       this.$nextTick(() => {
-        this.$axios.post('http://docline-api.development/v1/oauth/token', {
+        this.$axios({ sendToken: false }).post('oauth/token', {
           grant_type: 'password',
           client_id: process.env.API_CLIENT_ID,
           client_secret: process.env.API_CLIENT_SECRET,
@@ -71,7 +71,7 @@ export default {
           password: 'secret123',
           scope: ''
         }).then(res => {
-          console.log(res)
+          localStorage.setItem('bearer_token', res.data.access_token)
         }).catch(err => {
           console.log(err)
         })
