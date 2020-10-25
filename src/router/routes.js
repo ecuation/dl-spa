@@ -1,14 +1,17 @@
 
-const routes = [
-  // {
-  //   path: '/',
-  //   component: () => import('layouts/MainLayout.vue'),
-  //   children: [
-  //     { path: '', component: () => import('pages/Index.vue') }
-  //   ]
-  // },
+export const routes = [
   {
-    path: '/',
+    path: '/test',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/Index.vue') }
+    ],
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/login',
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', component: () => import('pages/Login.vue') }
@@ -23,4 +26,19 @@ const routes = [
   }
 ]
 
-export default routes
+export const makeBeforeEach = ({ ...args }) => {
+  return (to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+      if (localStorage.getItem('bearerToken') == null) {
+        next({
+          path: '/login',
+          params: { nextUrl: to.fullPath }
+        })
+      } else {
+        next()
+      }
+    } else {
+      next()
+    }
+  }
+}

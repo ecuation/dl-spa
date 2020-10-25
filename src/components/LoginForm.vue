@@ -71,7 +71,7 @@ export default {
           password: 'secret123',
           scope: ''
         }).then(res => {
-          localStorage.setItem('bearer_token', res.data.access_token)
+          localStorage.setItem('bearerToken', res.data.access_token)
         }).catch(err => {
           console.log(err)
         })
