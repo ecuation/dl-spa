@@ -63,13 +63,10 @@ export default {
   methods: {
     onSubmit () {
       this.$nextTick(() => {
-        // const clientId = process.env.API_CLIENT_ID
-        // const secret = process.env.API_CLIENT_SECRET
-        console.log(process.env.API_CLIENT_ID)
         this.$axios.post('http://docline-api.development/v1/oauth/token', {
           grant_type: 'password',
-          client_id: 2,
-          client_secret: '7jMyljwyEDRNQJtyhfl9YmVdzMoBxbZT0ZpAhYth',
+          client_id: process.env.API_CLIENT_ID,
+          client_secret: process.env.API_CLIENT_SECRET,
           username: 'test-user@docline.development',
           password: 'secret123',
           scope: ''
