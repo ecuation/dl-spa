@@ -26,6 +26,8 @@
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@quasar/app": "^2.0.0",
+    "@quasar/quasar-app-extension-dotenv": "^1.0.5",
+    "@quasar/quasar-app-extension-qenv": "^1.0.3",
     "@storybook/addon-actions": "^6.0.26",
     "@storybook/addon-essentials": "^6.0.26",
     "@storybook/addon-links": "^6.0.26",

@@ -56,14 +56,29 @@ export default {
   },
   data () {
     return {
-      email: '',
-      password: ''
+      email: 'test@test.dev',
+      password: 'secret'
     }
   },
   methods: {
     onSubmit () {
-      // eslint-disable-next-line
-      console.log("Form submitted yay!");
+      this.$nextTick(() => {
+        // const clientId = process.env.API_CLIENT_ID
+        // const secret = process.env.API_CLIENT_SECRET
+        console.log(process.env.API_CLIENT_ID)
+        this.$axios.post('http://docline-api.development/v1/oauth/token', {
+          grant_type: 'password',
+          client_id: 2,
+          client_secret: '7jMyljwyEDRNQJtyhfl9YmVdzMoBxbZT0ZpAhYth',
+          username: 'test-user@docline.development',
+          password: 'secret123',
+          scope: ''
+        }).then(res => {
+          console.log(res)
+        }).catch(err => {
+          console.log(err)
+        })
+      })
     }
   }
 }
