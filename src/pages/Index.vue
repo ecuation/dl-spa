@@ -143,7 +143,7 @@ export default {
     }
   },
   mounted () {
-    this.$axios({ sendToken: true }).get('/api/managers').then(res => {
+    this.$axios({ sendToken: true }).get('/managers').then(res => {
       const { data } = res
       this.options.managers = data.data
       this.search()
@@ -176,7 +176,7 @@ export default {
     search () {
       const query = this.encodeFiltersToURLToAPIQuery(this.filters)
       const page = this.pagination.currentPage
-      this.$axios({ sendToken: true }).get(`/api/employees?page=${page}${query}`).then(res => {
+      this.$axios({ sendToken: true }).get(`/employees?page=${page}${query}`).then(res => {
         const { data } = res
         this.employees = data.data
         this.pagination.currentPage = data.meta.current_page
