@@ -2,24 +2,30 @@
 
 frontend
 
-## Install the dependencies
+## Clone the project repo and install the dependencies
 ```bash
+git clone git@github.com:ecuation/docline-spa.git docline-spa.development
+cd docline-spa.development
 npm install
 ```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
+## Copy the .env.example file name as .env
 ```bash
-quasar dev
+cp .env.example ./.env
 ```
 
-### Lint the files
+###  Paste the API Oauth credentials in the .env file and set the correct API base URL
+### Important
 ```bash
-npm run lint
+API_URL=http://yourapidomain.development/v1/api
+API_CLIENT_ID=2
+API_CLIENT_SECRET=PnsKKdsUsyQAVpAuvEEDrBAeXIWZmmPwZ2whrLaN
 ```
 
-### Build the app for production
+
+### Start the app in development mode
 ```bash
-quasar build
+npm run dev
 ```
 
 ### Customize the configuration

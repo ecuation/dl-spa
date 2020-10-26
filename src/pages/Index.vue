@@ -36,6 +36,7 @@
                   class="q-my-sm"
                   clickable
                   v-ripple
+                  @click="showDialog(employee)"
           >
             <q-item-section avatar>
               <q-avatar color="primary" text-color="white">
@@ -46,10 +47,6 @@
             <q-item-section>
               <q-item-label>{{ employee.name }}</q-item-label>
               <q-item-label caption lines="1">Hired at: {{ employee.employee_hire_date }}</q-item-label>
-            </q-item-section>
-
-            <q-item-section side>
-              <q-btn label="View" color="primary" @click="showDialog(employee)" />
             </q-item-section>
 
           </q-item>
@@ -68,25 +65,39 @@
         <q-dialog v-model="displayDialog">
           <q-card>
             <q-card-section>
-              <div class="text-h6">{{ dialogEmployee.name }}</div>
+              <q-item-section class="q-pa-none">
+                <q-item-label lines="1" class="q-pa-none text-h3">{{ dialogEmployee.name }}</q-item-label>
+                <q-item-label caption> <span class="text-bold">Hired at:</span> {{ dialogEmployee.employee_hire_date }}</q-item-label>
+              </q-item-section>
             </q-card-section>
 
             <q-card-section class="q-pt-none flex flex-inline">
               <q-list class="salary-list employee-list">
                 <h6>Salary history</h6>
-                <q-item v-for="salary in dialogEmployee.salaries" :key="salary.salary">
-                  <span>
-                    <span class="text-bold">{{ salary.salary }}$ </span>
-                    <span>from: {{ salary.from_date }} - to: {{ salary.to_date }}</span>
-                  </span>
 
+                <q-item v-for="salary in dialogEmployee.salaries" :key="salary.salary">
+                  <q-item-section avatar top>
+                    <q-avatar icon="attach_money" color="grey" text-color="white" />
+                  </q-item-section>
+
+                  <q-item-section>
+                    <q-item-label lines="1"> <span class="text-bold">Salary:</span> {{ salary.salary }}$</q-item-label>
+                    <q-item-label caption>{{ salary.from_date }} - {{ salary.to_date }}</q-item-label>
+                  </q-item-section>
                 </q-item>
               </q-list>
 
               <q-list class="employee-list">
                 <h6>Title history</h6>
                 <q-item v-for="title in dialogEmployee.titles" :key="title.title">
-                  {{ title.title }}
+                  <q-item-section avatar top>
+                    <q-avatar icon="assignment" color="grey" text-color="white" />
+                  </q-item-section>
+
+                  <q-item-section>
+                    <q-item-label lines="1"> <span class="text-bold">Title:</span> {{ title.title }}</q-item-label>
+                    <q-item-label caption>{{ title.from_date }} - {{ title.to_date }}</q-item-label>
+                  </q-item-section>
                 </q-item>
               </q-list>
             </q-card-section>
