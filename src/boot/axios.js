@@ -3,8 +3,8 @@ import axios from 'axios'
 
 const httpAxiosAuth = ({ sendToken = false }) => {
   const headers = () => {
-    if (localStorage.getItem('bearer_token') && sendToken) {
-      return { Authorization: 'Bearer ' + localStorage.getItem('bearer_token') }
+    if (localStorage.getItem('bearerToken') && sendToken) {
+      return { Authorization: 'Bearer ' + localStorage.getItem('bearerToken') }
     }
     return null
   }
