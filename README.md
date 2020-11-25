@@ -1,11 +1,11 @@
-# Docline-frontend
+# Quasar-frontend
 The frontend framework used for this web client is Quasar, a Vue.js component library similar as Vuetify.
 See [Quasar page for more info](https://quasar.dev/quasar-cli/installation).
 
 ## Lest's clone the project repo and install the dependencies
 ```bash
-git clone git@github.com:ecuation/docline-spa.git docline-spa.development
-cd docline-spa.development
+git clone git@github.com:ecuation/dl-spa.git dl-spa.development
+cd dl-spa.development
 npm install
 ```
 
